@@ -1,0 +1,50 @@
+name: 'AirWatch Upload'
+description: 'Upload .apk or .ipa'
+inputs:
+  api_host:
+    description: 'AirWatch API host URL'
+    required: true
+  organisation_group_id:
+    description: "AirWatch organisation group ID"
+    required: true
+  username:
+    description: 'AirWatch username used for credentials'
+    required: true
+  password:
+    description: 'AirWatch password used for credentials'
+    required: true
+  tenant_code:
+    description: "AirWatch tenant code used for credentials"
+    required: true
+  application_name:
+    description: "Application name used on AirWatch list of apps"
+    required: true
+  application_identifier:
+    description: "Application identifier of the .apk or .ipa being uploaded"
+    required: true
+  application_file_path:
+    description: "File path to the .apk or .ipa to be uploaded"
+    required: true
+  device_model_id:
+    description: "Device model of the application to be uploaded"
+    required: true
+  device_type:
+    description: "Device type of the application to be uploaded"
+    required: true
+outputs:
+  application_id:
+    description: 'The ID given to the uploaded application'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.api_host }}
+    - ${{ inputs.organisation_group_id }}
+    - ${{ inputs.username }}
+    - ${{ inputs.password }}
+    - ${{ inputs.tenant_code }}
+    - ${{ inputs.application_name }}
+    - ${{ inputs.application_identifier }}
+    - ${{ inputs.application_file_path }}
+    - ${{ inputs.device_type }}
+    - ${{ inputs.device_model_id }}
